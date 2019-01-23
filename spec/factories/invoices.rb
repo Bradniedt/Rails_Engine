@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :invoice do
-    customer { nil }
-    merchant { nil }
+    customer { rand(1..1000) }
+    merchant { rand(1..1000) }
   end
 end
