@@ -7,9 +7,9 @@ describe 'Customers API' do
     three = Customer.create(first_name: "Bill", last_name: "Three")
 
     get '/api/v1/customers'
-
-    customers = JSON.parse(response.body)
+  
+    customers = JSON.parse(response.body)["data"]
     expect(response).to be_successful
-    expect(customers.count).to eq(1)
+    expect(customers.count).to eq(3)
   end
 end
