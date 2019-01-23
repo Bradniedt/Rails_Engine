@@ -2,9 +2,7 @@ require 'rails_helper'
 
 describe 'Merchants API' do
   it 'returns a json list of merchant data' do
-    one = Merchant.create(name: "Merch1")
-    two = Merchant.create(name: "Merch2")
-    three = Merchant.create(name: "Merch3")
+    create_list(:merchant, 3)
 
     get '/api/v1/merchants'
 
