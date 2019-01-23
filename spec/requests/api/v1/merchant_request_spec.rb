@@ -18,11 +18,16 @@ describe 'Merchants API' do
     item2 = create(:item, merchant_id: merch2.id, unit_price: 100)
     item3 = create(:item, merchant_id: merch3.id, unit_price: 100)
     invoice1 = create(:invoice, item_id: item_1.id, quantity: 10)
-    invoice2 = create(:invoice, item_id: item_2.id, quantity: 5)         
+    invoice2 = create(:invoice, item_id: item_2.id, quantity: 5)
     invoice3 = create(:invoice, item_id: item_3.id, quantity: 2)
+    invoiceitem1 = create(:invoice_item, item_id: item1, invoice_id: invoice1,
+                          quantity: 10, unit_price: 100)
+    invoiceitem1 = create(:invoice_item, item_id: item1, invoice_id: invoice1,
+                          quantity: 10, unit_price: 100)
     create(:transaction, invoice_id: invoice1.id, result: 'success')
     create(:transaction, invoice_id: invoice1.id, result: 'success')
     create(:transaction, invoice_id: invoice1.id, result: 'success')
     create(:transaction, invoice_id: invoice1.id, result: 'success')
+
   end
 end

@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :item do
     name { "" }
     description { "" }
-    unit_price { "" }
-    merchant { nil }
+    unit_price { rand(100..1000) }
+    merchant
   end
 end
