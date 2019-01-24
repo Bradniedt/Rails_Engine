@@ -8,13 +8,14 @@ RSpec.describe Merchant, type: :model do
   end
   describe 'instance methods' do
     it '.total_revenue' do
-      merchant = create(:merchant)
-      invoice1 = create(:invoice)
-      invoice_item1 = create(:invoice_item, invoice_id: invoice1.id quantity: 10, unit_price: 10)
+      merchant1 = create(:merchant)
+      item1 = create(:item)
+      invoice1 = create(:invoice, merchant_id: merchant1.id)
+      invoice_item1 = create(:invoice_item, item_id: item1.id, invoice_id: invoice1.id, quantity: 10, unit_price: 10)
       transaction1 = create(:transaction, invoice_id: invoice1.id)
       transaction2 = create(:transaction, invoice_id: invoice1.id)
 
-      expect(merchant.top_revenue).to eq(200)
+      expect(merchant1.top_revenue).to eq(200)
     end
   end
 end
