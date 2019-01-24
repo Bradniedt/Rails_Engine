@@ -11,23 +11,18 @@ describe 'Merchants API' do
     expect(merchants.count).to eq(3)
   end
   it 'returns the total revenue for a merchant across successful transactions' do
-    merch1 = create(:merchant)
-    merch2 = create(:merchant)
-    merch3 = create(:merchant)
-    item1 = create(:item, merchant_id: merch1.id, unit_price: 100)
-    item2 = create(:item, merchant_id: merch2.id, unit_price: 100)
-    item3 = create(:item, merchant_id: merch3.id, unit_price: 100)
-    invoice1 = create(:invoice, item_id: item_1.id, quantity: 10)
-    invoice2 = create(:invoice, item_id: item_2.id, quantity: 5)
-    invoice3 = create(:invoice, item_id: item_3.id, quantity: 2)
-    invoiceitem1 = create(:invoice_item, item_id: item1, invoice_id: invoice1,
-                          quantity: 10, unit_price: 100)
-    invoiceitem1 = create(:invoice_item, item_id: item1, invoice_id: invoice1,
-                          quantity: 10, unit_price: 100)
-    create(:transaction, invoice_id: invoice1.id, result: 'success')
-    create(:transaction, invoice_id: invoice1.id, result: 'success')
-    create(:transaction, invoice_id: invoice1.id, result: 'success')
-    create(:transaction, invoice_id: invoice1.id, result: 'success')
+    merchant1 = create(:merchant)
+    item1 = create(:item)
+    invoice1 = create(:invoice, merchant_id: merchant1.id)
+    invoice_item1 = create(:invoice_item, item_id: item1.id, invoice_id: invoice1.id, quantity: 10, unit_price: 10)
+    transaction1 = create(:transaction, invoice_id: invoice1.id)
+    transaction2 = create(:transaction, invoice_id: invoice1.id)
+    id = merchant1.id
 
+    get "/api/v1/merchants/#{id}/revenue"
+
+    number = JSON.parse(response.body)["data"]
+
+    expect(number).to eq(200)
   end
 end
