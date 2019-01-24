@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :customers, only: [:index]
       resources :merchants, only: [:index]
       resources :invoices, only: [:index]
+      get '/merchants/:id/revenue', to: "revenue#index"
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

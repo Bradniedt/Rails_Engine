@@ -15,7 +15,7 @@ RSpec.describe Merchant, type: :model do
       transaction1 = create(:transaction, invoice_id: invoice1.id)
       transaction2 = create(:transaction, invoice_id: invoice1.id)
 
-      expect(merchant1.top_revenue).to eq(200)
+      expect(merchant1.total_revenue).to eq(200)
     end
   end
 end

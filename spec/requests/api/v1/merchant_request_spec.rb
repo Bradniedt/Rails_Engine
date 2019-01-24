@@ -21,7 +21,7 @@ describe 'Merchants API' do
 
     get "/api/v1/merchants/#{id}/revenue"
 
-    number = JSON.parse(response.body)["data"]
+    number = JSON.parse(response.body)["data"]["attributes"]["total_revenue"]
 
     expect(number).to eq(200)
   end
