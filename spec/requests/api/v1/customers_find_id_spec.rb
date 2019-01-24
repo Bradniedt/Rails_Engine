@@ -12,4 +12,15 @@ describe 'Customers API' do
     expect(response).to be_successful
     expect(customer["attributes"]["id"]).to eq(id)
   end
+  it 'finds and returns customer data based on a first name' do
+    customer1 = create(:customer)
+    customer2 = create(:customer)
+    f_name = customer1.first_name
+
+    get "/api/v1/customers/find?first_name=#{f_name}"
+
+    customer = JSON.parse(response.body)["data"]
+    expect(response).to be_successful
+    expect(customer["attributes"]["first_name"]).to eq(f_name)
+  end
 end
