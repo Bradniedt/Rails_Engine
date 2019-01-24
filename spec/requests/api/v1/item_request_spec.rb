@@ -10,4 +10,14 @@ describe 'Items API' do
     expect(response).to be_successful
     expect(items.count).to eq(3)
   end
+  it 'returns data for a specific item' do
+    item1 = create(:item)
+    id = item1.id
+
+    get "/api/v1/items/#{id}"
+
+    item = JSON.parse(response.body)["data"]
+    expect(response).to be_successful
+    expect(item["attributes"]["name"]).to eq(item1.name)
+  end
 end
