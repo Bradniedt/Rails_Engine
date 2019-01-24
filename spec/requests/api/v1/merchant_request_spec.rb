@@ -10,7 +10,7 @@ describe 'Merchants API' do
     expect(response).to be_successful
     expect(merchants.count).to eq(3)
   end
-  it 'returns data for a specificmerchant' do
+  it 'returns data for a specific merchant' do
     merch1 = create(:merchant)
     id = merch1.id
 
