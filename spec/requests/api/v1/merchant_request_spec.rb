@@ -18,7 +18,7 @@ describe 'Merchants API' do
 
     merchant = JSON.parse(response.body)["data"]
     expect(response).to be_successful
-    expect(merchant["attributes"]["first_name"]).to eq(cust1.first_name)
+    expect(merchant["attributes"]["name"]).to eq(merch1.name)
   end
   it 'returns the total revenue for a merchant across successful transactions' do
     merchant1 = create(:merchant)
