@@ -14,4 +14,14 @@ describe 'Invoices API' do
     expect(response).to be_successful
     expect(invoices.count).to eq(3)
   end
+  it 'returns data for a specific invoice' do
+    invoice1 = create(:invoice)
+    id = invoice1.id
+
+    get "/api/v1/invoices/#{id}"
+
+    invoice = JSON.parse(response.body)["data"]
+    expect(response).to be_successful
+    expect(invoice["attributes"]["status"]).to eq(invoice1.status)
+  end
 end
