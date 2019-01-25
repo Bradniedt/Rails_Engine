@@ -45,4 +45,15 @@ describe 'Customers API' do
     expect(response).to be_successful
     expect(customer["attributes"]["id"]).to eq(customer1.id)
   end
+  it 'finds and returns customer data based on updated_at' do
+    customer1 = create(:customer, updated_at: "2012-03-27 14:54:09 UTC")
+    customer2 = create(:customer)
+    u_at = customer1.updated_at
+
+    get "/api/v1/customers/find?updated_at=#{u_at}"
+
+    customer = JSON.parse(response.body)["data"]
+    expect(response).to be_successful
+    expect(customer["attributes"]["id"]).to eq(customer1.id)
+  end
 end
