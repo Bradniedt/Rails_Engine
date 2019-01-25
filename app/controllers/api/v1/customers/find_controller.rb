@@ -10,6 +10,8 @@ class Api::V1::Customers::FindController < ApplicationController
       render json: CustomerSerializer.new(l_name)
     elsif params[:created_at]
       render json: CustomerSerializer.new(Customer.find_by(created_at: params[:created_at]))
+    elsif params[:updated_at]
+      render json: CustomerSerializer.new(Customer.find_by(updated_at: params[:updated_at]))
     end
   end
 end
