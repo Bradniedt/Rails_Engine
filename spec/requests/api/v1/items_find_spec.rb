@@ -27,6 +27,7 @@ describe 'Items API' do
     item1 = create(:item)
     item2 = create(:item)
     description = item1.description
+    parameter = description.parameterize
 
     get "/api/v1/items/find?description=#{description}"
 
@@ -55,17 +56,6 @@ describe 'Items API' do
     item = JSON.parse(response.body)["data"]
     expect(response).to be_successful
     expect(item["attributes"]["merchant_id"]).to eq(merchant_id)
-  end
-  it 'finds and returns item data based on a status' do
-    item1 = create(:item)
-    item2 = create(:item)
-    status = item1.status
-
-    get "/api/v1/items/find?status=#{status}"
-
-    item = JSON.parse(response.body)["data"]
-    expect(response).to be_successful
-    expect(item["attributes"]["status"]).to eq(status)
   end
   it 'finds and returns item data based on created_at' do
     item1 = create(:item, created_at: "2012-03-27 14:54:09 UTC")
