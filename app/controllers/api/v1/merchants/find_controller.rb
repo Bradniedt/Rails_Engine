@@ -3,7 +3,7 @@ class Api::V1::Merchants::FindController < ApplicationController
     if params[:id]
       render json: MerchantSerializer.new(Merchant.find(params[:id]))
     elsif params[:name]
-      name= Merchant.where("LOWER(merchants.first_name) = ?", params[:name].downcase).first
+      name= Merchant.where("LOWER(merchants.name) = ?", params[:name].downcase).first
       render json: MerchantSerializer.new(name)
     elsif params[:created_at]
       render json: MerchantSerializer.new(Merchant.find_by(created_at: params[:created_at]))
