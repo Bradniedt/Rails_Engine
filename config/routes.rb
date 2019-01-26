@@ -33,6 +33,7 @@ Rails.application.routes.draw do
       resources :transactions, only: [:index, :show]
       get '/merchants/:id/revenue', to: "revenue#show"
       get '/merchants/:id/favorite_customer', to: "favorite#show"
+      get '/items/:id/best_day', to: "best#show"
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

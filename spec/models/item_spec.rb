@@ -78,7 +78,7 @@ RSpec.describe Item, type: :model do
 
       best_day = item1.best_day["created_at"]
 
-      expect(best_day).to eq("Fri, 23 Mar 2012 09:54:09 UTC +00:00")
+      expect(best_day).to eq("Sun, 25 Mar 2012 09:54:09 UTC +00:00")
     end
   end
 end

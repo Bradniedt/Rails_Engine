@@ -21,4 +21,13 @@ class Item < ApplicationRecord
             .order("total_sold DESC")
             .limit(x)
   end
+  def best_day
+    Merchant.select("invoices.created_at, sum(invoice_items.quantity) AS total_sold")
+            .joins(invoices: [:transactions, :invoice_items])
+            .joins(:items)
+            .where("invoice_items.item_id= ?", self.id)
+            .group("invoices.id")
+            .order("total_sold DESC, invoices.created_at ASC")
+            .limit(1)[0]
+  end
 end
