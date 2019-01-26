@@ -30,7 +30,7 @@ describe 'Merchants BI API' do
     date = "2012-03-25 09:54:09 UTC"
 
     get "/api/v1/merchants/#{id}/revenue?date=#{date}"
-
+    
     number = JSON.parse(response.body)["data"]["attributes"]["date_revenue"]
 
     expect(number).to eq(125)

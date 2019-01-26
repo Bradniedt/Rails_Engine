@@ -26,7 +26,7 @@ Rails.application.routes.draw do
       resources :items, only: [:index, :show]
       resources :invoice_items, only: [:index, :show]
       resources :transactions, only: [:index, :show]
-      get '/merchants/:id/revenue', to: "revenue#index"
+      get '/merchants/:id/revenue', to: "revenue#show"
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
