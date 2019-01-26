@@ -9,8 +9,16 @@ class Merchant < ApplicationRecord
   end
   def date_revenue(date)
     self.invoices.joins(:invoice_items, :transactions)
-                 .where("transactions.result = ?", "success")
-                 .where("invoices.created_at = ?", date)
-                 .sum("invoice_items.unit_price * invoice_items.quantity")
+        .where("transactions.result = ?", "success")
+        .where("invoices.created_at = ?", date)
+        .sum("invoice_items.unit_price * invoice_items.quantity")
+  end
+  def favorite_customer
+    Customer.joins(invoices: [:transactions])
+            .select("customers.*, sum(invoices.id) AS transaction_count")
+            .where("transactions.result = ? AND invoices.merchant_id = ?", "success", self.id)
+            .group("customers.id")
+            .order("transaction_count DESC")
+            .limit(1)[0]
   end
 end
