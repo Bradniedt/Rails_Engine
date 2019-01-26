@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       resources :invoice_items, only: [:index, :show]
       resources :transactions, only: [:index, :show]
       get '/merchants/:id/revenue', to: "revenue#show"
+      get '/merchants/:id/favorite_customer', to: "favorite#show"
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
