@@ -120,11 +120,11 @@ describe 'Merchants BI API' do
     transaction3 = create(:transaction, invoice_id: invoice3.id)
     date = "2012-03-25 09:54:09 UTC"
 
-    get "/api/v1/merchants/revenue?date=#{}"
+    get "/api/v1/merchants/revenue?date=#{date}"
 
-    number = JSON.parse(response.body)["data"]["total_revenue"]
+    number = JSON.parse(response.body)["data"]["attributes"]
 
     expect(response).to be_successful
-    expect(number).to eq(125)
+    expect(number["total_revenue"]).to eq(150)
   end
 end
