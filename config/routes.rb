@@ -7,12 +7,17 @@ Rails.application.routes.draw do
       end
       namespace :merchants do
         get '/find', to: "find#show"
+        get '/most_revenue', to: "revenue#index"
+        get '/most_items', to: "sold#index"
+        get '/revenue', to: "revenue#index"
       end
       namespace :invoices do
         get '/find', to: "find#show"
       end
       namespace :items do
         get '/find', to: "find#show"
+        get '/most_revenue', to: "revenue#index"
+        get '/most_items', to: "sold#index"
       end
       namespace :invoice_items do
         get '/find', to: "find#show"
@@ -26,7 +31,9 @@ Rails.application.routes.draw do
       resources :items, only: [:index, :show]
       resources :invoice_items, only: [:index, :show]
       resources :transactions, only: [:index, :show]
-      get '/merchants/:id/revenue', to: "revenue#index"
+      get '/merchants/:id/revenue', to: "revenue#show"
+      get '/merchants/:id/favorite_customer', to: "favorite#show"
+      get '/items/:id/best_day', to: "best#show"
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
