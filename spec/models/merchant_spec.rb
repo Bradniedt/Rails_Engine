@@ -100,8 +100,7 @@ RSpec.describe Merchant, type: :model do
       transaction3 = create(:transaction, invoice_id: invoice3.id)
       date = "2012-03-25 09:54:09 UTC"
 
-      expect(response).to be_successful
-      expect(Merchant.all_revenue(date)).to eq(125)
+      expect(Merchant.all_revenue(date)).to eq(150)
     end
   end
 end
