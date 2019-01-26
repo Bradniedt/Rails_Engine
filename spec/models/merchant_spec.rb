@@ -54,22 +54,19 @@ RSpec.describe Merchant, type: :model do
   end
   describe 'class methods' do
     it '#top_by_revenue' do
-      merchant1 = create(:merchant)
-      merchant2 = create(:merchant)
+      merchant1 = create(:merchant, name: "one")
+      merchant2 = create(:merchant, name: "two")
       merchant3 = create(:merchant)
-      item1 = create(:item, merchant_id: merchant1.id)
       invoice1 = create(:invoice, merchant_id: merchant1.id)
-      invoice_item1 = create(:invoice_item, item_id: item1.id, invoice_id: invoice1.id, quantity: 10, unit_price: 10)
-      invoice_item3 = create(:invoice_item, item_id: item1.id, invoice_id: invoice1.id, quantity: 5, unit_price: 5)
+      invoice_item1 = create(:invoice_item, invoice_id: invoice1.id, quantity: 10, unit_price: 10)
+      invoice_item3 = create(:invoice_item, invoice_id: invoice1.id, quantity: 5, unit_price: 5)
       transaction1 = create(:transaction, invoice_id: invoice1.id)
       invoice2 = create(:invoice, merchant_id: merchant2.id)
-      invoice_item2 = create(:invoice_item, item_id: item1.id, invoice_id: invoice2.id, quantity: 10, unit_price: 10)
-      transaction2 = create(:transaction, invoice_id: invoice2.id)
-      invoice3 = create(:invoice, merchant_id: merchant3.id)
-      invoice_item4 = create(:invoice_item, item_id: item1.id, invoice_id: invoice2.id, quantity: 5, unit_price: 5)
-      transaction3 = create(:transaction, invoice_id: invoice2.id)
+      invoice_item3 = create(:invoice_item, invoice_id: invoice2.id, quantity: 5, unit_price: 5)
+      transaction1 = create(:transaction, invoice_id: invoice2.id)
 
-      expect(Merchant.top_by_revenue(2)).to eq([merchant1, merchant2])
+      expect(Merchant.top_by_revenue(2)[0].id).to eq(merchant1.id)
+      expect(Merchant.top_by_revenue(2)[1].id).to eq(merchant2.id)
     end
   end
 end
