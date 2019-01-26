@@ -76,10 +76,9 @@ RSpec.describe Item, type: :model do
       invoice_item4 = create(:invoice_item, item_id: item1.id, invoice_id: invoice3.id, quantity: 5, unit_price: 5)
       transaction3 = create(:transaction, invoice_id: invoice3.id)
 
-      best_day = item1.best_day
+      best_day = item1.best_day["created_at"]
 
-      expect(response).to be_successful
-      expect(best_day).to eq("2012-03-25 09:54:09 UTC")
+      expect(best_day).to eq("Fri, 23 Mar 2012 09:54:09 UTC +00:00")
     end
   end
 end
