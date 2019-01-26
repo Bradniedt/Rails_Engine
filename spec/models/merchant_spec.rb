@@ -68,5 +68,21 @@ RSpec.describe Merchant, type: :model do
       expect(Merchant.top_by_revenue(2)[0].id).to eq(merchant1.id)
       expect(Merchant.top_by_revenue(2)[1].id).to eq(merchant2.id)
     end
+    it '#top_by_sold' do
+      merchant1 = create(:merchant, name: "one")
+      merchant2 = create(:merchant, name: "two")
+      merchant3 = create(:merchant)
+      invoice1 = create(:invoice, merchant_id: merchant1.id)
+      invoice_item1 = create(:invoice_item, invoice_id: invoice1.id, quantity: 10, unit_price: 10)
+      invoice_item3 = create(:invoice_item, invoice_id: invoice1.id, quantity: 5, unit_price: 5)
+      transaction1 = create(:transaction, invoice_id: invoice1.id)
+      invoice2 = create(:invoice, merchant_id: merchant2.id)
+      invoice_item3 = create(:invoice_item, invoice_id: invoice2.id, quantity: 3, unit_price: 5)
+      transaction1 = create(:transaction, invoice_id: invoice2.id)
+
+      merchants = Merchant.top_by_sold
+      expect(merchants[0]["id"].to_i).to eq(merchant1.id)
+      expect(merchants[1]["id"].to_i).to eq(merchant2.id)
+    end
   end
 end
