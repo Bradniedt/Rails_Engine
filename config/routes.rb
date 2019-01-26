@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       namespace :items do
         get '/find', to: "find#show"
         get '/most_revenue', to: "revenue#index"
+        get '/most_items', to: "sold#index"
       end
       namespace :invoice_items do
         get '/find', to: "find#show"
