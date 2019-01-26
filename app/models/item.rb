@@ -12,4 +12,13 @@ class Item < ApplicationRecord
             .order("revenue DESC")
             .limit(x)
   end
+  def self.top_by_sold(x)
+    Merchant.select("items.*, sum(invoice_items.quantity) AS total_sold")
+            .joins(invoices: [:transactions, :invoice_items])
+            .joins(:items)
+            .where("transactions.result = ?", "success")
+            .group("items.id")
+            .order("total_sold DESC")
+            .limit(x)
+  end
 end
