@@ -54,7 +54,6 @@ describe 'Merchants BI API' do
     invoice_item4 = create(:invoice_item, item_id: item1.id, invoice_id: invoice2.id, quantity: 10, unit_price: 10)
     transaction3 = create(:transaction, invoice_id: invoice2.id)
     id = merchant1.id
-    date = "2012-03-25 09:54:09 UTC"
 
     get "/api/v1/merchants/#{id}/favorite_customer"
 
