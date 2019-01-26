@@ -72,7 +72,7 @@ describe 'Items BI API' do
     transaction3 = create(:transaction, invoice_id: invoice3.id)
     id = item1.id
 
-    get "/api/v1/items/best_day?id=#{id}"
+    get "/api/v1/items/:id/best_day"
 
     best_day = JSON.parse(response.body)["data"]
 
