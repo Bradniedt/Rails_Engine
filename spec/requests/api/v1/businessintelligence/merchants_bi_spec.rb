@@ -104,4 +104,27 @@ describe 'Merchants BI API' do
     expect(merchants[0]["id"].to_i).to eq(merchant1.id)
     expect(merchants[1]["id"].to_i).to eq(merchant2.id)
   end
+  it 'returns the total revenue for all merchants on a specific date' do
+    merchant1 = create(:merchant, name: "one")
+    merchant2 = create(:merchant, name: "two")
+    merchant3 = create(:merchant, name: "three")
+    invoice1 = create(:invoice, merchant_id: merchant1.id, created_at: "2012-03-25 09:54:09 UTC")
+    invoice_item1 = create(:invoice_item, invoice_id: invoice1.id, quantity: 10, unit_price: 10)
+    invoice_item3 = create(:invoice_item, invoice_id: invoice1.id, quantity: 5, unit_price: 5)
+    transaction1 = create(:transaction, invoice_id: invoice1.id)
+    invoice2 = create(:invoice, merchant_id: merchant2.id)
+    invoice_item3 = create(:invoice_item, invoice_id: invoice2.id, quantity: 5, unit_price: 5)
+    transaction1 = create(:transaction, invoice_id: invoice2.id)
+    invoice3 = create(:invoice, merchant_id: merchant3.id, created_at: "2012-03-25 09:54:09 UTC")
+    invoice_item4 = create(:invoice_item, invoice_id: invoice3.id, quantity: 5, unit_price: 5)
+    transaction3 = create(:transaction, invoice_id: invoice3.id)
+    date = "2012-03-25 09:54:09 UTC"
+
+    get "/api/v1/merchants/revenue?date=#{}"
+
+    number = JSON.parse(response.body)["data"]["total_revenue"]
+
+    expect(response).to be_successful
+    expect(number).to eq(125)
+  end
 end
