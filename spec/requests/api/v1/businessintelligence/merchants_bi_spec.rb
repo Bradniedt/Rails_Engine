@@ -76,10 +76,10 @@ describe 'Merchants BI API' do
 
     get "/api/v1/merchants/most_revenue?quantity=2"
 
-    merchants = JSON.parse(response.body)["data"]["attributes"]
+    merchants = JSON.parse(response.body)["data"]
 
     expect(response).to be_successful
-    expect(merchants.count).to eq(3)
+    expect(merchants.count).to eq(2)
     expect(merchants[0]["id"]).to eq(merchant1.id)
     expect(merchants[1]["id"]).to eq(merchant2.id)
   end
