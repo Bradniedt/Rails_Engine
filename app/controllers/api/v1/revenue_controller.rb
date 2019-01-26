@@ -1,6 +1,6 @@
 class Api::V1::RevenueController < ApplicationController
   def show
-    if params[:date]
+    if params[:date] && params[:id]
       num = Merchant.find(params[:id]).date_revenue(params[:date])
       render json: DateRevenueSerializer.new(DateRevenue.new(num))
     elsif params[:id]
