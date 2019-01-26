@@ -80,7 +80,7 @@ describe 'Merchants BI API' do
 
     expect(response).to be_successful
     expect(merchants.count).to eq(2)
-    expect(merchants[0]["id"]).to eq(merchant1.id)
-    expect(merchants[1]["id"]).to eq(merchant2.id)
+    expect(merchants[0]["id"].to_i).to eq(merchant1.id)
+    expect(merchants[1]["id"].to_i).to eq(merchant2.id)
   end
 end
