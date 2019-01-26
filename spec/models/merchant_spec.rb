@@ -80,7 +80,7 @@ RSpec.describe Merchant, type: :model do
       invoice_item3 = create(:invoice_item, invoice_id: invoice2.id, quantity: 3, unit_price: 5)
       transaction1 = create(:transaction, invoice_id: invoice2.id)
 
-      merchants = Merchant.top_by_sold
+      merchants = Merchant.top_by_sold(2)
       expect(merchants[0]["id"].to_i).to eq(merchant1.id)
       expect(merchants[1]["id"].to_i).to eq(merchant2.id)
     end
