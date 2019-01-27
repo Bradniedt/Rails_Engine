@@ -8,10 +8,10 @@ describe 'Merchant Relationship Endpoints' do
     item3 = create(:item, merchant_id: merchant.id)
     id = merchant.id
 
-    get '/api/v1/merchants/#{id}/items'
+    get "/api/v1/merchants/#{id}/items"
 
     items = JSON.parse(response.body)["data"]
-
+    
     expect(response).to be_successful
     expect(items[0]["id"].to_i).to eq(item1.id)
     expect(items[1]["id"].to_i).to eq(item2.id)
