@@ -27,5 +27,14 @@ RSpec.describe Invoice, type: :model do
       expect(items[1]["id"].to_i).to eq(item2.id)
       expect(items[2]["id"].to_i).to eq(item3.id)
     end
+    it '.customer' do
+      merchant = create(:merchant)
+      customer = create(:customer)
+      invoice = create(:invoice, customer_id: customer.id, merchant_id: merchant.id)
+
+      customer = invoice.customer
+
+      expect(customer[0]["id"].to_i).to eq(customer.id)
+    end
   end
 end
