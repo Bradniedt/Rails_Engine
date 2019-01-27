@@ -66,4 +66,16 @@ describe 'Invoice Relationship Endpoints' do
     expect(response).to be_successful
     expect(customer["id"].to_i).to eq(customer1.id)
   end
+  it 'returns the merchant associated with a specific invoice' do
+    merchant1 = create(:merchant)
+    invoice = create(:invoice, merchant: merchant1)
+    id = invoice.id
+
+    get "/api/v1/invoices/#{id}/merchant"
+
+    merchant = JSON.parse(response.body)["data"]
+
+    expect(response).to be_successful
+    expect(merchant["id"].to_i).to eq(merchant1.id)
+  end
 end
