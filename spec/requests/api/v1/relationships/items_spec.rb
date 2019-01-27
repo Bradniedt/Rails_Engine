@@ -9,9 +9,10 @@ describe 'Item Relationship Endpoints' do
 
     get "/api/v1/items/#{id}/invoice_items"
 
-    invoice_items = JSON.parse(response.body)["data"]["attributes"]
+    invoice_items = JSON.parse(response.body)["data"]
 
     expect(response).to be_successful
     expect(invoice_items[0]["id"].to_i).to eq(invoice_item1.id)
     expect(invoice_items[1]["id"].to_i).to eq(invoice_item2.id)
   end
+end
