@@ -33,4 +33,24 @@ describe 'Invoice Relationship Endpoints' do
     expect(invoice_items[1]["id"].to_i).to eq(invoice_item2.id)
     expect(invoice_items[2]["id"].to_i).to eq(invoice_item3.id)
   end
+  it 'returns a collection of items associated with a specific invoice' do
+    merchant = create(:merchant)
+    invoice = create(:invoice, merchant_id: merchant.id)
+    item1 = create(:item, merchant_id: merchant.id, )
+    item2 = create(:item, merchant_id: merchant.id, )
+    item3 = create(:item, merchant_id: merchant.id, )
+    invoice_item1 = create(:invoice_item, item_id: item1.id, invoice_id: invoice.id)
+    invoice_item2 = create(:invoice_item, item_id: item2.id, invoice_id: invoice.id)
+    invoice_item3 = create(:invoice_item, item_id: item3.id, invoice_id: invoice.id)
+    id = invoice.id
+
+    get "/api/v1/invoices/#{id}/items"
+
+    items = JSON.parse(response.body)["data"]
+
+    expect(response).to be_successful
+    expect(items[0]["id"].to_i).to eq(item1.id)
+    expect(items[1]["id"].to_i).to eq(item2.id)
+    expect(items[2]["id"].to_i).to eq(item3.id)
+  end
 end
