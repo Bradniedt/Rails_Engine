@@ -11,30 +11,22 @@ RSpec.describe Invoice, type: :model do
     it { should have_many(:invoice_items) }
   end
   describe 'instance methods' do
-    it '.items' do
+    it '.my_items' do
       merchant = create(:merchant)
-      invoice = create(:invoice, merchant_id: merchant.id)
-      item1 = create(:item, merchant_id: merchant.id, )
-      item2 = create(:item, merchant_id: merchant.id, )
-      item3 = create(:item, merchant_id: merchant.id, )
+      customer = create(:customer)
+      invoice = create(:invoice, customer_id: customer.id, merchant_id: merchant.id)
+      item1 = create(:item, merchant_id: merchant.id)
+      item2 = create(:item, merchant_id: merchant.id)
+      item3 = create(:item, merchant_id: merchant.id)
       invoice_item1 = create(:invoice_item, item_id: item1.id, invoice_id: invoice.id)
       invoice_item2 = create(:invoice_item, item_id: item2.id, invoice_id: invoice.id)
       invoice_item3 = create(:invoice_item, item_id: item3.id, invoice_id: invoice.id)
 
-      items = invoice.items
+      items = invoice.my_items
 
-      expect(items[0]["id"].to_i).to eq(item1.id)
+      expect(items[2]["id"].to_i).to eq(item1.id)
       expect(items[1]["id"].to_i).to eq(item2.id)
-      expect(items[2]["id"].to_i).to eq(item3.id)
-    end
-    it '.customer' do
-      merchant = create(:merchant)
-      customer = create(:customer)
-      invoice = create(:invoice, customer_id: customer.id, merchant_id: merchant.id)
-
-      customer = invoice.customer
-
-      expect(customer[0]["id"].to_i).to eq(customer.id)
+      expect(items[0]["id"].to_i).to eq(item3.id)
     end
   end
 end
