@@ -19,8 +19,8 @@ describe 'Customer Relationship Endpoints' do
     customer1 = create(:customer)
     invoice1 = create(:invoice, customer_id: customer1.id)
     invoice2 = create(:invoice, customer_id: customer1.id)
-    transaction1 = create(:transaction, invoice_id: invoice_1.id)
-    transaction2 = create(:transaction, invoice_id: invoice_2.id)
+    transaction1 = create(:transaction, invoice_id: invoice1.id)
+    transaction2 = create(:transaction, invoice_id: invoice2.id)
     id = customer1.id
 
     get "/api/v1/customers/#{id}/transactions"
