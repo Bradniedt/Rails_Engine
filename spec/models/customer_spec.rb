@@ -31,5 +31,17 @@ RSpec.describe Customer, type: :model do
       merchant = customer.favorite_merchant
       expect(merchant["id"].to_i).to eq(merchant3.id)
     end
+    it '.all_transactions' do
+      customer1 = create(:customer)
+      invoice1 = create(:invoice, customer_id: customer1.id)
+      invoice2 = create(:invoice, customer_id: customer1.id)
+      transaction1 = create(:transaction, invoice_id: invoice1.id)
+      transaction2 = create(:transaction, invoice_id: invoice2.id)
+
+      transactions = customer1.all_transactions
+
+      expect(transactions[0]["id"].to_i).to eq(transaction1.id)
+      expect(transactions[1]["id"].to_i).to eq(transaction2.id)
+    end
   end
 end

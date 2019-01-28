@@ -3,5 +3,10 @@ class Invoice < ApplicationRecord
   belongs_to :customer
   belongs_to :merchant
   has_many :transactions, dependent: :destroy
-  has_many :invoice_items, dependent: :destroy 
+  has_many :invoice_items, dependent: :destroy
+
+  def my_items
+    Merchant.select("items.*").joins(items: :invoice_items).joins(:invoices).where("invoices.id = ?", self.id)
+  end
+
 end
