@@ -6,6 +6,7 @@ Rails.application.routes.draw do
         get '/find', to: "find#show"
         get '/:id/favorite_merchant', to: "favorite#show"
         get '/:id/invoices', to: "invoices#index"
+        get '/:id/transactions', to: "transactions#index"
       end
       namespace :merchants do
         get '/find', to: "find#show"
