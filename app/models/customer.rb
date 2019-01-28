@@ -10,4 +10,7 @@ class Customer < ApplicationRecord
             .order("transaction_count DESC")
             .limit(1)[0]
   end
+  def all_transactions
+    Invoice.select("transactions.*").joins(:transactions).where("invoices.customer_id = ?", self.id)
+  end
 end
