@@ -11,6 +11,6 @@ describe 'Transaction Relationship Endpoints' do
     invoice = JSON.parse(response.body)["data"]
 
     expect(response).to be_successful
-    expect(invoice[0]["id"].to_i).to eq(invoice1.id)
+    expect(invoice["id"].to_i).to eq(invoice1.id)
   end
 end
